@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cron 表达式可视化：人话解释、下次触发时间、日视图。纯前端、零依赖。" />
+  <title>cron-canvas — Cron 表达式可视化</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>cron-canvas</h1>
+      <p>粘贴 cron 表达式 → 人话解释字段、列出接下来触发时间、画出一天内哪些分钟会响。数据不出浏览器。</p>
+    </header>
+
+    <section class="panel">
+      <h2>表达式</h2>
+      <div class="row">
+        <input
+          id="cronInput"
+          type="text"
+          spellcheck="false"
+          autocomplete="off"
+          value="0 9 * * 1-5"
+          aria-label="cron 表达式"
+        />
+        <label for="tzSelect">时区</label>
+        <select id="tzSelect" aria-label="时区">
+          <option value="Asia/Shanghai" selected>Asia/Shanghai</option>
+          <option value="UTC">UTC</option>
+          <option value="America/New_York">America/New_York</option>
+          <option value="Europe/London">Europe/London</option>
+        </select>
+      </div>
+      <div class="presets" aria-label="预设示例">
+        <button type="button" data-cron="0 9 * * 1-5">0 9 * * 1-5</button>
+        <button type="button" data-cron="*/15 * * * *">*/15 * * * *</button>
+        <button type="button" data-cron="30 8,12,18 * * *">30 8,12,18 * * *</button>
+        <button type="button" data-cron="0 0 1 * *">0 0 1 * *</button>
+        <button type="button" data-cron="0 */5 * * * *">0 */5 * * * *</button>
+      </div>
+      <div id="error" class="error" role="alert"></div>
+    </section>
+
+    <section class="panel">
+      <h2>说明</h2>
+      <div id="fields" class="fields"></div>
+    </section>
+
+    <section class="panel">
+      <h2>接下来触发</h2>
+      <ul id="nextList" class="next-list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>日视图</h2>
+      <div id="dayMeta" class="day-meta"></div>
+      <div id="dayGrid" class="day-grid" aria-label="一天内触发分钟格子"></div>
+      <div class="legend">
+        <span><i class="on"></i>该 5 分钟内有触发</span>
+        <span><i class="off"></i>无</span>
+      </div>
+    </section>
+
+    <footer>
+      <p>纯前端 · MIT · <a href="https://github.com/temptation2017/cron-canvas">temptation2017/cron-canvas</a></p>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
